@@ -154,13 +154,13 @@ if [[ $input == 'y' ]]; then
 				echo $url >> output/$domain/sqli-suspects.txt
 			 fi
 		 else
-			 if [[ $(curl --silent $url | grep "${server}sql") != '' ]]; then
+			 if [[ $(curl --silent $url | grep "sql") != '' ]]; then #${server}
 				 echo $url >> output/$domain/sqli-suspects.txt
 			 fi
 		 fi
 		 count=$((count+1))
 		 echo "${cyan}Progress: ${count}/${total_urls} URLs${reset}"
-	done < output/$domain/parameterised_urls.txt
+	done < output/$domain/sqli.txt
 	echo "${reset}"
 	if [[ -f output/$domain/sqli-suspects.txt ]]; then
 		echo -e "\n${red}Number of suspected URLs: $(grep "" -c output/$domain/sqli-suspects.txt)\n"
